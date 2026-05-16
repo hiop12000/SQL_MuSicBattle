@@ -1,0 +1,64 @@
+SET search_path TO music_battle;
+
+INSERT INTO users (user_name, user_password, logo, lobby_status) VALUES
+('Alex', 'alex123!!!!', default, true),
+('Mila', 'mila4!!!!56ADAD', 'logos/misdsa.png', false),
+('Dany', 'dany78fF??9', 'logos/danchy.png', default),
+('Sophie', 'sophie1###11', 'logos/sphie.png', default),
+('Max', 'max()()()222', 'logos/ggggas.png', true),
+('FGAS', 'FFGGAAS9S!!!', 'logos/PEGAS.png', default),
+('TYRRE', 'dff524!(552', 'logos/sdsd.png', false),
+('Maksim', '322MATHANDCODE#', 'logos/QQQ.png', true);
+
+INSERT INTO Friend_forms (sender_id, addressee_id, status) VALUES
+(1, 2, true),
+(2, 3, false),
+(3, 8, default),
+(7, 1, false),
+(5, 1, true);
+
+INSERT INTO Maps (
+    user_id,
+    name_map,
+    rating,
+    level_map,
+    music_map,
+    link_song,
+    state_map
+)
+VALUES
+(1, 'Bjork - The Gate', 5, 3, '1 3 2 5 7** ...', 'https://music.com/song1', true),
+(1, 'Coldplay - Yellow', 4, 2, '4 6 2 2** 9 1 ...', 'https://music.com/song2', true),
+(3, 'NEVEREND', 5, 4, '3 3 1 1 2 2 1 1 4 5 9 1 ...', 'https://music.com/song3', default);
+
+INSERT INTO Lobbies (map_id, is_active) VALUES
+(1, true),
+(2, true),
+(3, false),
+(3, default),
+(1, default);
+
+SET search_path TO music_battle;
+-- При заходе в лобби результат сначала 0, потом back-end получая форму вызывает UPDATE
+-- Место которое нуждается в оптимизации
+INSERT INTO LobbyMembers (lobby_id, user_id, user_result) VALUES
+(1, 1, 0),
+(1, 2, 0),
+(2, 3, 0),
+(2, 7, 0),
+(3, 5, 0),
+(5, 4, 0),
+(5, 6, 0);
+
+SET search_path TO music_battle;
+-- При заходе в лобби результат сначала 0, потом back-end получая форму вызывает UPDATE
+-- Место которое нуждается в оптимизации
+INSERT INTO Matches (map_id)
+VALUES
+(3),
+(1);
+
+INSERT INTO Games (user_id, match_id, user_result) VALUES
+(5, 1, 7.1),
+(1, 2, 5.2),
+(2, 2, 6.7);
