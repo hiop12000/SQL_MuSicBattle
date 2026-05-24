@@ -1,7 +1,0 @@
-CREATE DOMAIN music_battle.password_type AS TEXT
-CHECK (
-    VALUE ~ '^(?=.*[A-Za-z])(?=.*\d)(?=.*[!#$%()?]).{8,20}$'
-);
-
-CREATE DOMAIN music_battle.positive AS NUMERIC(2, 1)
-CONSTRAINT positive_num CHECK (VALUE >= 0);
