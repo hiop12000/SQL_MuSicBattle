@@ -1,0 +1,15 @@
+set search_path to music_battle;
+
+alter table lobbies
+add column status VARCHAR(20)
+constraint special_status check (status in ('waiting', 'active', 'completed', 'cancelled'));
+
+update lobbies
+set status = case 
+    when is_active = true then 'active'
+    else 'completed'
+end;
+
+alter table lobbies alter column status set not null;
+alter table lobbies
+drop column is_active;

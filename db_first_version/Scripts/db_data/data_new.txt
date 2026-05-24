@@ -1,0 +1,318 @@
+SET search_path TO music_battle;
+
+INSERT INTO Users (user_name, user_password, logo, lobby_status) VALUES
+('AetherPulse', 'AePulse88!!', 'images/logos/aether.png', true),
+('Mila', 'mila4!!!!56ADAD', 'images/logos/mila.png', false),
+('NullByte', 'Null4455##', 'images/logos/nullbyte.png', true),
+('Sophie', 'sophie1###11', 'images/logos/sophie.png', false),
+('Kuro', 'Kuro7788??', 'images/logos/kuro.png', true),
+('Zenith', 'Zen999!!AB', 'images/logos/zenith.png', false),
+('Tyrre', 'dff524!(552', 'images/logos/tyrre.png', true),
+('Maksim', '322MATHANDCODE#', 'images/logos/maksim.png', true),
+('Yume', 'Yume2024$$', 'images/logos/yume.png', false),
+('Arclight', 'Arc4455!!', 'images/logos/arclight.png', default),
+('DeltaFox', 'Fox2020##', 'images/logos/deltafox.png', false),
+('Niko', 'Niko2020##', 'images/logos/niko.png', true),
+('Lena', 'Lena777!!A', 'images/logos/lena.png', false),
+('Rin', 'Rin8888??', 'images/logos/rin.png', true),
+('PixelRain', 'Pixel333$$', 'images/logos/pixelrain.png', true),
+('Eva', 'Eva8888##A', 'images/logos/eva.png', false),
+('Cryon', 'Cryon111!!', 'images/logos/cryon.png', true),
+('Aki', 'Aki9090$$', 'images/logos/aki.png', false),
+('Overtone', 'Overtone55#', 'images/logos/overtone.png', default),
+('Nova', 'Nova2233!!', 'images/logos/nova.png', false),
+('LucidBeat', 'Lucid0099??', 'images/logos/lucidbeat.png', true),
+('Rei', 'Rei445566!!', 'images/logos/rei.png', false),
+('FrostWire', 'Frost7788##', 'images/logos/frostwire.png', true),
+('Echo', 'Echo8899$$', 'images/logos/echo.png', true),
+('Vanta', 'Vanta6677!!', 'images/logos/vanta.png', default);
+
+
+INSERT INTO Friend_forms (sender_id, addressee_id, status) VALUES
+(1, 2, true),
+(1, 8, default),
+(3, 5, false),
+(4, 7, true),
+(5, 9, false),
+(6, 1, true),
+(7, 10, true),
+(8, 3, false),
+(9, 12, true),
+(10, 15, false),
+(11, 14, true),
+(12, 16, false),
+(13, 18, default),
+(14, 20, true),
+(15, 21, false),
+(16, 22, true),
+(17, 24, false),
+(18, 11, true),
+(19, 13, default),
+(20, 25, false),
+(21, 5, true),
+(22, 7, false),
+(23, 2, true),
+(24, 6, true),
+(25, 17, false);
+
+
+INSERT INTO Maps (
+    user_id,
+    name_map,
+    rating,
+    level_map,
+    music_map,
+    link_song,
+    state_map
+)
+VALUES
+(1, 'Bjork - The Gate', 5, 3, '1 3 2 5 7** ...', 'https://music.com/song1', true),
+(1, 'Coldplay - Yellow', 4, 2, '4 6 2 2** 9 1 ...', 'https://music.com/song2', true),
+(2, 'ZUTOMAYO - Darken', 4.7, 7, '2 2 4 8 6 1', 'https://music.example/darken', false),
+(3, 'Ado - Usseewa', 5.0, 8, '9 9 4 2 1 6', 'https://music.example/usseewa', default),
+(3, 'NEVEREND', 5, 4, '3 3 1 1 2 2 1 1 4 5 9 1 ...', 'https://music.com/song3', default),
+(4, 'YOASOBI - Idol', 4.8, 9, '1 3 5 7 9 3', 'https://music.example/idol', true),
+(5, 'Mili - String Theocracy', 4.6, 6, '7 7 1 4 8 8', 'https://music.example/string', false),
+(6, 'Porter Robinson - Shelter', 4.5, 5, '3 5 3 2 8 6', 'https://music.example/shelter', true),
+(7, 'Kenshi Yonezu - Lemon', 4.4, 4, '1 1 2 2 5 5', 'https://music.example/lemon', true),
+(8, 'Eve - Kaikai Kitan', 4.8, 7, '8 6 4 2 8 6', 'https://music.example/kaikai', default),
+(9, 'Reol - No Title', 4.9, 8, '4 1 4 1 5 9', 'https://music.example/notitle', false),
+(10, 'Nujabes - Feather', 4.2, 3, '1 2 3 1 2 3', 'https://music.example/feather', true),
+(11, 'TUYU - Compared Child', 4.7, 8, '8 8 3 3 1 1', 'https://music.example/compared', default),
+(12, 'Aimer - Brave Shine', 4.3, 5, '5 5 4 4 2 2', 'https://music.example/brave', true),
+(13, 'Silentroom - Nhelv', 5.0, 10, '9 1 9 1 9 1', 'https://music.example/nhelv', default),
+(14, 'DJ Okawari - Flower Dance', 4.6, 4, '2 5 8 5 2 1', 'https://music.example/flowerdance', false),
+(15, 'Linkin Park - Numb', 4.5, 6, '3 3 7 7 1 1', 'https://music.example/numb', true),
+(16, 'RADWIMPS - Sparkle', 4.8, 7, '1 4 7 4 1 9', 'https://music.example/sparkle', true),
+(17, 'Hoshimachi Suisei - Stellar', 4.9, 9, '5 5 5 8 8 8', 'https://music.example/stellar', true),
+(18, 'Daft Punk - Veridis Quo', 4.1, 3, '1 6 1 6 1 6', 'https://music.example/veridis', true),
+(19, 'Polyphia - Playing God', 4.7, 8, '9 3 2 8 1 4', 'https://music.example/playinggod', false),
+(20, 'Feryquitous - Arcahv', 5.0, 10, '8 8 9 9 1 1', 'https://music.example/arcahv', default),
+(21, 'Sewerslvt - Cyberia', 4.4, 6, '2 4 6 8 2 4', 'https://music.example/cyberia', true),
+(22, 'Team Grimoire - C18H27NO3', 4.8, 9, '9 7 5 3 1 9', 'https://music.example/c18', true),
+(23, 'Kikuo - Aishite', 4.6, 7, '4 4 6 6 8 8', 'https://music.example/aishite', false),
+(24, 'Inabakumori - Lagtrain', 4.5, 5, '1 8 1 8 1 8', 'https://music.example/lagtrain', true),
+(25, 'Toby Fox - Hopes and Dreams', 4.9, 8, '7 2 7 2 7 2', 'https://music.example/hopesdreams', true);
+
+
+INSERT INTO Lobbies (map_id, is_active) VALUES
+(1, true),
+(1, default),
+(1, true),
+(2, true),
+(2, default),
+(3, false),
+(4, true),
+(5, false),
+(6, true),
+(7, default),
+(8, false),
+(9, true),
+(10, true),
+(11, false),
+(12, true),
+(13, true),
+(14, false),
+(15, default),
+(16, true),
+(17, false),
+(18, true),
+(19, false),
+(20, default),
+(21, true),
+(22, false),
+(23, true),
+(24, default),
+(25, false);
+
+
+INSERT INTO LobbyMembers (lobby_id, user_id, user_result) VALUES
+(1, 1, 8.7),
+(1, 8, 7.5),
+(1, 21, 9.1),
+--
+(2, 3, 5.4),
+--
+(3, 5, 9.3),
+(3, 14, 8.8),
+--
+(4, 2, 6.7),
+(4, 18, 7.0),
+--
+(5, 7, 4.8),
+--
+(6, 4, 0),
+(6, 19, 0),
+--
+(7, 6, 8.2),
+(7, 12, 7.7),
+(7, 25, 9.0),
+--
+(8, 10, 0),
+--
+(9, 11, 7.5),
+(9, 17, 8.1),
+--
+(10, 9, 6.2),
+--
+(11, 13, 0),
+(11, 22, 0),
+--
+(12, 15, 8.4),
+(12, 20, 7.6),
+--
+(13, 16, 7.3),
+--
+(14, 24, 0),
+--
+(15, 5, 8.8),
+(15, 7, 7.2),
+--
+(16, 18, 9.6),
+(16, 1, 9.0),
+--
+(17, 2, 0),
+--
+(18, 3, 6.8),
+(18, 23, 7.4),
+--
+(19, 14, 8.5),
+(19, 9, 7.1),
+--
+(20, 11, 0),
+--
+(21, 6, 7.8),
+(21, 21, 8.3),
+--
+(22, 4, 0),
+--
+(23, 12, 8.9),
+(23, 19, 9.2),
+--
+(24, 16, 7.0),
+(24, 8, 6.6),
+--
+(25, 25, 0),
+--
+(26, 10, 8.1),
+(26, 13, 7.7),
+--
+(27, 20, 6.5),
+--
+(28, 24, 0),
+(28, 15, 0);
+
+
+INSERT INTO Matches (map_id) VALUES
+(15),
+(3),
+(6),
+(1),
+(20),
+(4),
+(4),
+(25),
+(13),
+(7),
+(9),
+(18),
+(2),
+(21),
+(16),
+(5),
+(11),
+(24),
+(8),
+(22),
+(6),
+(10),
+(3),
+(14),
+(17),
+(19),
+(12),
+(23);
+
+
+INSERT INTO Games (user_id, match_id, user_result) VALUES
+(18, 1, 9.8),
+(1, 1, 9.1),
+--
+(2, 2, 6.5),
+(7, 2, 7.2),
+--
+(6, 3, 8.0),
+(12, 3, 7.5),
+--
+(1, 4, 8.4),
+(8, 4, 7.8),
+(21, 4, 9.0),
+--
+(20, 5, 9.7),
+(15, 5, 8.8),
+--
+(3, 6, 9.3),
+(9, 6, 7.9),
+--
+(14, 7, 8.5),
+(22, 7, 8.0),
+--
+(25, 8, 9.6),
+--
+(16, 9, 9.9),
+(5, 9, 8.7),
+--
+(11, 10, 6.6),
+(24, 10, 7.1),
+--
+(13, 11, 8.4),
+(19, 11, 7.8),
+--
+(4, 12, 5.9),
+--
+(10, 13, 7.0),
+(23, 13, 7.4),
+--
+(17, 14, 8.3),
+(6, 14, 7.7),
+--
+(8, 15, 8.8),
+(2, 15, 6.4),
+--
+(5, 16, 7.9),
+(21, 16, 8.5),
+--
+(12, 17, 8.1),
+(20, 17, 8.9),
+--
+(24, 18, 7.5),
+(9, 18, 6.8),
+--
+(15, 19, 8.6),
+(7, 19, 7.9),
+--
+(1, 20, 9.2),
+(18, 20, 9.5),
+--
+(11, 21, 7.4),
+(25, 21, 8.1),
+--
+(3, 22, 6.2),
+--
+(14, 23, 8.8),
+(16, 23, 9.0),
+--
+(4, 24, 5.5),
+(19, 24, 7.3),
+--
+(22, 25, 8.7),
+(13, 25, 8.1),
+--
+(10, 26, 7.6),
+(5, 26, 8.0),
+--
+(6, 27, 7.2),
+(23, 27, 7.9),
+--
+(17, 28, 8.4),
+(24, 28, 7.7);

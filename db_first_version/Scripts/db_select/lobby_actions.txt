@@ -1,0 +1,17 @@
+set search_path to music_battle;
+
+--сортировка карт по уровню и рейтингу если известно название
+select *
+from maps m
+where name_map = 'название карты'
+order by level_map, rating
+
+
+*******************
+
+--поиск лобби в которые еще можно зайти по map_id
+
+select *
+from lobbies
+where map_id = <map_id> and status = 'waiting'
+

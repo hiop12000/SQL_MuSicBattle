@@ -1,0 +1,21 @@
+SET search_path to music_battle;
+
+--лучший результат для карты
+select m.map_id, max(g.user_result)
+from games g
+inner join matches m on g.match_id = m.match_id
+group by m.map_id;
+
+
+
+--средний результат для карты
+select m.map_id, avg(g.user_result)::numeric(4,2)
+from games g
+inner join matches m on g.match_id = m.match_id
+group by m.map_id;
+
+*****
+select m.map_id, cast(avg(g.user_result) as numeric(4, 2))
+from games g
+inner join matches m on g.match_id = m.match_id
+group by m.map_id;

@@ -1,0 +1,67 @@
+SET search_path to music_battle;
+
+--статистика пользователя:
+
+--кол-во игр каждого пользователя
+select u.user_id, COUNT(g.match_id)
+from users u
+left outer join games g on u.user_id = g.user_id
+group by u.user_id
+
+
+--рассмотрим отдельного пользователя и его лучший результат на сыгранных картах
+
+select u.user_id, m.map_id, MAX(g.user_result)
+from (
+	select *
+	from users u2
+	where u2.user_id = <id_пользователя>
+) u
+inner join games g using(user_id)
+inner join matches m using(match_id)
+group by u.user_id, map_id
+
+
+***********************************************************************************
+
+--карты созданные пользователем
+select *
+from (
+	select *
+	from users u2
+	where u2.user_id = <id_пользователя>
+) u
+inner join maps m using(user_id)
+
+
+***********************************************************************************
+
+--кол-во игр у игрока по картам, где null там 0...
+--как мне тут и имя карты вставить?
+--таблицу users можно вообще не включать если идем от id пользователя (сразу games)
+
+select map_id, COUNT(*)
+from (
+	select *
+	from users u2
+	where u2.user_id = 1
+) u
+inner join games g using(user_id)
+inner join matches _matches using(match_id)
+inner join maps _maps using(map_id)
+group by map_id
+
+
+--улучшение:
+select map_id, name_map, COUNT(game_id) as games_count
+from (
+	select *
+	from games g2
+	where g2.user_id = 1
+) g
+inner join matches _matches using(match_id)
+right outer join maps _maps using(map_id)
+group by map_id;
+
+
+***********************************************************************************

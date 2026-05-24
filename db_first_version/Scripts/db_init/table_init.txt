@@ -1,0 +1,56 @@
+SET search_path TO music_battle;
+
+
+CREATE TABLE Users (
+        user_id SERIAL PRIMARY KEY,
+	user_name VARCHAR(20) NOT NULL,
+        user_password password_type,
+	logo VARCHAR(255) DEFAULT 'path_to_base_image',
+	lobby_status BOOL DEFAULT false,
+	CONSTRAINT unique_name UNIQUE(user_name)
+);
+
+
+CREATE TABLE Friend_forms (
+	form_id SERIAL PRIMARY KEY,
+	sender_id INTEGER REFERENCES Users(user_id) ON DELETE CASCADE,
+	addressee_id INTEGER REFERENCES Users(user_id) ON DELETE CASCADE,
+	status BOOL DEFAULT false,
+	UNIQUE(sender_id, addressee_id)
+);
+
+CREATE TABLE Maps (
+	map_id SERIAL PRIMARY KEY,
+	user_id INTEGER REFERENCES Users(user_id) ON DELETE RESTRICT,
+	name_map VARCHAR(40) NOT NULL,
+	rating positive,
+	level_map INTEGER NOT NULL CHECK (level_map >= 0),
+	music_map TEXT NOT NULL,
+	link_song VARCHAR(255) NOT NULL,
+	state_map BOOL DEFAULT false
+);
+
+CREATE TABLE Lobbies (
+	lobby_id SERIAL PRIMARY KEY,
+	map_id INTEGER REFERENCES Maps(map_id) ON DELETE CASCADE,
+	is_active BOOL DEFAULT true
+);
+
+CREATE TABLE LobbyMembers (
+	lobby_id INTEGER REFERENCES Lobbies(lobby_id) ON DELETE CASCADE,
+	user_id INTEGER REFERENCES Users(user_id) ON DELETE CASCADE,
+	user_result positive DEFAULT 0,
+	PRIMARY KEY (lobby_id, user_id)
+);
+
+CREATE TABLE Matches (
+	match_id SERIAL PRIMARY KEY,
+	map_id INTEGER REFERENCES Maps(map_id) ON DELETE RESTRICT
+);
+
+CREATE TABLE Games (
+	game_id SERIAL PRIMARY KEY,
+	user_id INTEGER REFERENCES Users(user_id) ON DELETE CASCADE,
+	match_id INTEGER REFERENCES Matches(match_id) ON DELETE CASCADE,
+	user_result positive NOT NULL
+);

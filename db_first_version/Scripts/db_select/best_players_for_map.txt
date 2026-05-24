@@ -1,0 +1,29 @@
+SET search_path to music_battle;
+
+--лучший игрок/игроки для карты (с самым высоким результатом)
+
+select u.user_id, g.user_result, u.user_name, m.map_id
+from games g
+inner join matches m on g.match_id = m.match_id
+inner join users u on g.user_id = u.user_id
+inner join (
+	select m2.map_id, max(g2.user_result) as max_result
+	from games g2
+	inner join matches m2 on g2.match_id = m2.match_id
+	inner join users u2 on g2.user_id = u2.user_id
+	group by m2.map_id
+) cond on m.map_id = cond.map_id and g.user_result = cond.max_result;
+
+--можно через in
+
+select u.user_id, g.user_result, u.user_name, m.map_id
+from games g
+inner join matches m on g.match_id = m.match_id
+inner join users u on g.user_id = u.user_id
+where (m.map_id, g.user_result) in (
+	select m2.map_id, max(g2.user_result)
+	from games g2
+	inner join matches m2 on g2.match_id = m2.match_id
+	inner join users u2 on g2.user_id = u2.user_id
+	group by m2.map_id
+)

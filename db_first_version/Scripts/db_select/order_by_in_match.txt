@@ -1,0 +1,34 @@
+SET search_path to music_battle;
+
+--сортировка по результатам в матче (лобби):
+--все матчи:
+select *
+from games g
+order by g.match_id ASC, g.user_result DESC;
+
+--конкретный матч:
+select *
+from games g
+where g.match_id = <нужный матч>
+order by g.user_result DESC;
+
+
+--победители в матчах:
+select *
+from games g
+where (g.match_id, g.user_result) in (
+	select g2.match_id, max(g2.user_result)
+	from games g2
+	group by match_id
+)
+
+
+--победитель матча:
+select *
+from games g
+where (g.match_id, g.user_result) in (
+	select g2.match_id, max(g2.user_result)
+	from games g2
+	group by match_id
+	having match_id = <нужный матч>
+)

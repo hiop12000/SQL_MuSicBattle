@@ -1,0 +1,15 @@
+SET search_path to music_battle;
+
+select map_id, COUNT(match_id)
+from maps _maps
+inner join matches _matches using(map_id)
+group by map_id
+
+
+--самые часто играемые (сортировка):
+
+select map_id, COUNT(match_id) as games_count
+from maps _maps
+inner join matches _matches using(map_id)
+group by map_id
+order by games_count DESC
