@@ -1,4 +1,4 @@
-SET search_path to music_battle;
+SET search_path to music_battle_v_1;
 
 --лучший результат для карты
 select m.map_id, max(g.user_result)

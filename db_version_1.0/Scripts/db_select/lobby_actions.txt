@@ -1,4 +1,4 @@
-set search_path to music_battle;
+set search_path to music_battle_v_1;
 
 --сортировка карт по уровню и рейтингу если известно название
 select *

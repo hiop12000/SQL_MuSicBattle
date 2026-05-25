@@ -1,0 +1,70 @@
+set search_path to music_battle_v_2;
+
+--создаем таблицы
+
+CREATE TABLE Users (
+        user_id SERIAL PRIMARY KEY,
+	user_name VARCHAR(20) NOT NULL,
+        user_password password_type,
+	logo VARCHAR(255) DEFAULT 'path_to_base_image',
+	date_of_registration DATE DEFAULT current_date,
+	CONSTRAINT unique_name UNIQUE(user_name)
+);
+
+
+CREATE TABLE Friend_forms (
+	form_id SERIAL PRIMARY KEY,
+	sender_id INTEGER REFERENCES Users(user_id) ON DELETE CASCADE,
+	addressee_id INTEGER REFERENCES Users(user_id) ON DELETE CASCADE,
+	status VARCHAR(10) NOT NULL,
+	CONSTRAINT special_status CHECK(status in ('waiting', 'accepted', 'cancelled')),
+	UNIQUE(sender_id, addressee_id)
+);
+
+CREATE TABLE Maps (
+	map_id SERIAL PRIMARY KEY,
+	user_id INTEGER REFERENCES Users(user_id) ON DELETE RESTRICT,
+	map_name VARCHAR(40) NOT NULL,
+	rating positive,
+	map_level INTEGER NOT NULL CHECK(map_level BETWEEN 1 AND 10),
+	music_map TEXT NOT NULL,
+	link_song VARCHAR(255) NOT NULL,
+	map_state BOOL DEFAULT false
+);
+
+CREATE TABLE Evaluation (
+	user_id INTEGER REFERENCES Users(user_id) ON DELETE CASCADE,
+	map_id INTEGER REFERENCES Maps(map_id) ON DELETE CASCADE,
+	rating INTEGER NOT NULL CHECK(rating BETWEEN 1 AND 5),
+        PRIMARY KEY (user_id, map_id)
+);
+
+CREATE TABLE Lobbies (
+	lobby_id SERIAL PRIMARY KEY,
+	map_id INTEGER REFERENCES Maps(map_id) ON DELETE SET NULL,
+	creator_id INTEGER REFERENCES Users(user_id) ON DELETE RESTRICT,
+	status VARCHAR(10) NOT NULL,
+	time_of_play INT CHECK(time_of_play BETWEEN 1 AND 1800),
+	time_of_init TIMESTAMPTZ DEFAULT NOW(),
+	CONSTRAINT special_status CHECK(status in ('waiting', 'active', 'completed', 'cancelled'))
+);
+
+CREATE TABLE LobbyMembers (
+	lobby_id INTEGER REFERENCES Lobbies(lobby_id) ON DELETE CASCADE,
+	user_id INTEGER REFERENCES Users(user_id) ON DELETE RESTRICT,
+	user_result positive DEFAULT 0,
+	PRIMARY KEY (lobby_id, user_id)
+);
+
+CREATE TABLE Matches (
+	match_id SERIAL PRIMARY KEY,
+	map_id INTEGER REFERENCES Maps(map_id) ON DELETE SET NULL,
+	date_of_match DATE default current_date
+);
+
+CREATE TABLE Games (
+	game_id SERIAL PRIMARY KEY,
+	user_id INTEGER REFERENCES Users(user_id) ON DELETE CASCADE,
+	match_id INTEGER REFERENCES Matches(match_id) ON DELETE CASCADE,
+	user_result positive NOT NULL
+);

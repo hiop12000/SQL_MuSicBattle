@@ -1,4 +1,4 @@
-SET search_path TO music_battle;
+SET search_path TO music_battle_v_1;
 
 
 CREATE TABLE Users (

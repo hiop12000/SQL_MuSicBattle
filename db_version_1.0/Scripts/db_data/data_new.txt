@@ -1,4 +1,4 @@
-SET search_path TO music_battle;
+SET search_path TO music_battle_v_1;
 
 INSERT INTO Users (user_name, user_password, logo, lobby_status) VALUES
 ('AetherPulse', 'AePulse88!!', 'images/logos/aether.png', true),
