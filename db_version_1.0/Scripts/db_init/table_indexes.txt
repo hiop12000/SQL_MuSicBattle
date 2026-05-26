@@ -4,3 +4,13 @@
 CREATE INDEX idx_friend_forms_sender on friend_forms(sender_id) where status = true;
 
 CREATE INDEX idx_friend_forms_addressee on friend_forms(addressee_id) where status = true;
+
+
+--для maps
+
+CREATE INDEX idx_maps_user_id on maps(user_id);
+
+
+--для lobby (открытые лобби)
+
+CREATE INDEX idx_lobby_map_id on lobbies(map_id) where is_active = true
