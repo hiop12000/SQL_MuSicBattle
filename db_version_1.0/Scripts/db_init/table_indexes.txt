@@ -1,0 +1,6 @@
+
+--индексы для friend_form (быстрый поиск друзей)
+
+CREATE INDEX idx_friend_forms_sender on friend_forms(sender_id) where status = true;
+
+CREATE INDEX idx_friend_forms_addressee on friend_forms(addressee_id) where status = true;

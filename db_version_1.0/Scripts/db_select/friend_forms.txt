@@ -1,0 +1,18 @@
+
+--друзья пользователя:
+
+set search_path to music_battle_v_1;
+
+select *
+from (
+	select *
+	from friend_forms
+	where sender_id = <user_id> and status = true
+)
+union
+select *
+from (
+	select *
+	from friend_forms
+	where addressee_id = <user_id> and status = true
+)
